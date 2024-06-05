@@ -1,0 +1,19 @@
+version: "3.9"
+name: local_environment
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16.3-alpine3.20
+    environment:
+      POSTGRES_DB: "hoteloom"
+      POSTGRES_USER: "superadmin"
+      POSTGRES_PASSWORD: "superpassword"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - hoteloom-db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  hoteloom-db-data:
