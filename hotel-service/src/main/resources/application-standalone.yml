@@ -1,0 +1,9 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hoteloom?currentSchema=hotel_service
+    driver-class-name: org.postgresql.Driver
+    username: hotel_service_user
+    password: password
