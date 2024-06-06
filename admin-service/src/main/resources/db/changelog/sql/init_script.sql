@@ -70,7 +70,7 @@ CREATE TABLE hotel_service.hotel_room_type (
    id         SMALLINT 	     		 NOT NULL PRIMARY KEY,
    name VARCHAR(200)                 NOT NULL,
    description TEXT NULL,
-   vl_cost INTEGER NOT NULL
+   cost INTEGER NOT NULL
 );
 
 /*==============================================================*/
