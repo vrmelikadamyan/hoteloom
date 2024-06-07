@@ -1,4 +1,4 @@
-package com.vmelik.hotel.entity;
+package com.vmelik.hotel.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
