@@ -1,4 +1,4 @@
-package com.vmelik.hotel;
+package com.vmelik.hotel.controller;
 
 import com.vmelik.hotel.model.entity.HotelRoom;
 import com.vmelik.hotel.model.request.AddHotelRoomRequest;
