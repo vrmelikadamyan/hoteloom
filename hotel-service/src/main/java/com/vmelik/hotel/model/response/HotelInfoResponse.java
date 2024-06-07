@@ -1,18 +1,17 @@
-package com.vmelik.hotel.entity;
+package com.vmelik.hotel.model.response;
 
-import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@Entity
-@Table(name = "hotel")
-public class Hotel {
+@NoArgsConstructor
+@AllArgsConstructor
+public class HotelInfoResponse {
 
-    @Id
-    @GeneratedValue
     private UUID id;
 
     private String name;
