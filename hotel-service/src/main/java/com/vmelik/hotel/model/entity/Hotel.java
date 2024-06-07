@@ -33,4 +33,7 @@ public class Hotel {
 
     @CreationTimestamp
     private LocalDateTime additionDate;
+
+//    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<HotelContact> contacts = new ArrayList<>();
 }
