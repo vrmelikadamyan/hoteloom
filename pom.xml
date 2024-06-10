@@ -11,7 +11,7 @@
     <modules>
         <module>admin-service</module>
         <module>hotel-service</module>
-        <module>reservation-service</module>
+        <module>client-service</module>
     </modules>
 
 </project>
