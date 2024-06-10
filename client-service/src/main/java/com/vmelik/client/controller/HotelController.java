@@ -1,5 +1,6 @@
 package com.vmelik.client.controller;
 
+import com.vmelik.client.client.HotelServiceClient;
 import com.vmelik.client.model.request.AddHotelRequest;
 import com.vmelik.client.model.request.UpdateHotelRequest;
 import com.vmelik.client.model.response.HotelInfoResponse;
@@ -14,27 +15,28 @@ import java.util.UUID;
 @RequestMapping("client/hotels")
 @RequiredArgsConstructor
 public class HotelController {
+    private final HotelServiceClient hotelServiceClient;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public HotelInfoResponse addHotel(@RequestBody @Valid AddHotelRequest hotel) {
-        return null;
+        return hotelServiceClient.addHotel(hotel);
     }
 
     @PutMapping("/{hotelId}")
     public HotelInfoResponse updateHotel(
             @PathVariable("hotelId") UUID hotelId,
             @RequestBody @Valid UpdateHotelRequest hotel) {
-        return null;
+        return hotelServiceClient.updateHotel(hotelId, hotel);
     }
 
     @GetMapping("/{hotelId}")
     public HotelInfoResponse findHotelById(@PathVariable("hotelId") UUID hotelId) {
-        return null;
+        return hotelServiceClient.findHotelById(hotelId);
     }
 
     @DeleteMapping("/{hotelId}")
     public HotelInfoResponse deleteHotel(@PathVariable("hotelId") UUID hotelId) {
-        return null;
+        return hotelServiceClient.deleteHotel(hotelId);
     }
 }
