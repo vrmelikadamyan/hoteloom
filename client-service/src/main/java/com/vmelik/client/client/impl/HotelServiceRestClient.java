@@ -1,8 +1,11 @@
 package com.vmelik.client.client.impl;
 
 import com.vmelik.client.client.HotelServiceClient;
+import com.vmelik.client.model.request.AddHotelContactRequest;
 import com.vmelik.client.model.request.AddHotelRequest;
+import com.vmelik.client.model.request.UpdateHotelContactRequest;
 import com.vmelik.client.model.request.UpdateHotelRequest;
+import com.vmelik.client.model.response.HotelContactInfoResponse;
 import com.vmelik.client.model.response.HotelInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -53,5 +56,45 @@ public class HotelServiceRestClient implements HotelServiceClient {
                 .uri("/{hotelId}", hotelId)
                 .retrieve()
                 .body(HotelInfoResponse.class);
+    }
+
+    @Override
+    public HotelContactInfoResponse addContact(AddHotelContactRequest contact) {
+        return hotelServiceRestClient
+                .post()
+                .uri("/contacts")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(contact)
+                .retrieve()
+                .body(HotelContactInfoResponse.class);
+    }
+
+    @Override
+    public HotelContactInfoResponse findContact(UUID contactId) {
+        return hotelServiceRestClient
+                .get()
+                .uri("/contacts/{contactId}", contactId)
+                .retrieve()
+                .body(HotelContactInfoResponse.class);
+    }
+
+    @Override
+    public HotelContactInfoResponse updateContact(UUID contactId, UpdateHotelContactRequest contact) {
+        return hotelServiceRestClient
+                .put()
+                .uri("/contacts/{contactId}", contactId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(contact)
+                .retrieve()
+                .body(HotelContactInfoResponse.class);
+    }
+
+    @Override
+    public HotelContactInfoResponse deleteContact(UUID contactId) {
+        return hotelServiceRestClient
+                .delete()
+                .uri("/contacts/{contactId}", contactId)
+                .retrieve()
+                .body(HotelContactInfoResponse.class);
     }
 }

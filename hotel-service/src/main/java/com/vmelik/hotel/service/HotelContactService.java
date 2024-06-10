@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface HotelContactService {
 
-    HotelContact addContact(UUID hotelId, AddHotelContactRequest hotelContact);
+    HotelContact addContact(AddHotelContactRequest hotelContact);
 
     HotelContact findContact(UUID contactId);
 

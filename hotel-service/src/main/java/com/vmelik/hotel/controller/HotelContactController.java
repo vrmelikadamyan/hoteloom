@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/hotels/{hotelId}/contacts")
+@RequestMapping("api/hotels/contacts")
 @RequiredArgsConstructor
 public class HotelContactController {
     private final HotelContactService hotelContactService;
 
     @PostMapping
     public HotelContactInfoResponse addContact(
-            @PathVariable("hotelId") UUID hotelId,
             @RequestBody @Valid AddHotelContactRequest addHotelContactRequest
     ) {
-        HotelContact hotelContact = hotelContactService.addContact(hotelId, addHotelContactRequest);
+        HotelContact hotelContact = hotelContactService.addContact(addHotelContactRequest);
 
         return new HotelContactInfoResponse(
                 hotelContact.getId(),
@@ -31,7 +30,7 @@ public class HotelContactController {
         );
     }
 
-    @GetMapping
+    @GetMapping("/{contactId}")
     public HotelContactInfoResponse findContact(
             @PathVariable("contactId") UUID contactId
     ) {
@@ -44,7 +43,7 @@ public class HotelContactController {
         );
     }
 
-    @PutMapping
+    @PutMapping("/{contactId}")
     public HotelContactInfoResponse updateContact(
             @PathVariable("contactId") UUID contactId,
             @RequestBody @Valid UpdateHotelContactRequest updateHotelContactRequest
@@ -58,7 +57,7 @@ public class HotelContactController {
         );
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{contactId}")
     public HotelContactInfoResponse deleteContact(
             @PathVariable("contactId") UUID contactId
     ) {

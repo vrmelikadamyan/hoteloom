@@ -25,8 +25,8 @@ public class HotelContactServiceImpl implements HotelContactService {
 
     @Override
     @Transactional
-    public HotelContact addContact(UUID hotelId, AddHotelContactRequest hotelContact) {
-        Hotel hotel = hotelService.findHotel(hotelId);
+    public HotelContact addContact(AddHotelContactRequest hotelContact) {
+        Hotel hotel = hotelService.findHotel(hotelContact.getHotelId());
         HotelContactType contactType = hotelContactTypeService.findContactType(hotelContact.getContactType());
 
         HotelContact contact = new HotelContact();
