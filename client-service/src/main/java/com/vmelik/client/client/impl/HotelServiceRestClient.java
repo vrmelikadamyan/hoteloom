@@ -1,12 +1,10 @@
 package com.vmelik.client.client.impl;
 
 import com.vmelik.client.client.HotelServiceClient;
-import com.vmelik.client.model.request.AddHotelContactRequest;
-import com.vmelik.client.model.request.AddHotelRequest;
-import com.vmelik.client.model.request.UpdateHotelContactRequest;
-import com.vmelik.client.model.request.UpdateHotelRequest;
+import com.vmelik.client.model.request.*;
 import com.vmelik.client.model.response.HotelContactInfoResponse;
 import com.vmelik.client.model.response.HotelInfoResponse;
+import com.vmelik.client.model.response.HotelRoomInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -96,5 +94,45 @@ public class HotelServiceRestClient implements HotelServiceClient {
                 .uri("/contacts/{contactId}", contactId)
                 .retrieve()
                 .body(HotelContactInfoResponse.class);
+    }
+
+    @Override
+    public HotelRoomInfoResponse addHotelRoom(AddHotelRoomRequest request) {
+        return hotelServiceRestClient
+                .post()
+                .uri("/rooms")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(request)
+                .retrieve()
+                .body(HotelRoomInfoResponse.class);
+    }
+
+    @Override
+    public HotelRoomInfoResponse findHotelRoom(UUID roomId) {
+        return hotelServiceRestClient
+                .get()
+                .uri("/rooms/{roomId}", roomId)
+                .retrieve()
+                .body(HotelRoomInfoResponse.class);
+    }
+
+    @Override
+    public HotelRoomInfoResponse updateHotelRoom(UUID roomId, UpdateHotelRoomRequest request) {
+        return hotelServiceRestClient
+                .put()
+                .uri("/rooms/{roomId}", roomId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(request)
+                .retrieve()
+                .body(HotelRoomInfoResponse.class);
+    }
+
+    @Override
+    public HotelRoomInfoResponse deleteHotelRoom(UUID roomId) {
+        return hotelServiceRestClient
+                .delete()
+                .uri("/rooms/{roomId}", roomId)
+                .retrieve()
+                .body(HotelRoomInfoResponse.class);
     }
 }

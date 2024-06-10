@@ -13,21 +13,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/hotels/{hotelId}/rooms")
+@RequestMapping("api/hotels/rooms")
 @RequiredArgsConstructor
 public class HotelRoomController {
     private final HotelRoomService hotelRoomService;
 
     @PostMapping
     public HotelRoomInfoResponse addHotelRoom(
-            @PathVariable("hotelId") UUID hotelId,
             @RequestBody @Valid AddHotelRoomRequest request
     ) {
-        HotelRoom hotelRoom = hotelRoomService.addRoom(hotelId, request);
+        HotelRoom hotelRoom = hotelRoomService.addRoom(request);
 
         return new HotelRoomInfoResponse(
                 hotelRoom.getId(),
-                hotelId,
+                hotelRoom.getHotel().getId(),
                 hotelRoom.getRoomNumber(),
                 hotelRoom.getDescription(),
                 new HotelRoomTypeResponse(

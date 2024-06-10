@@ -1,11 +1,9 @@
 package com.vmelik.client.client;
 
-import com.vmelik.client.model.request.AddHotelContactRequest;
-import com.vmelik.client.model.request.AddHotelRequest;
-import com.vmelik.client.model.request.UpdateHotelContactRequest;
-import com.vmelik.client.model.request.UpdateHotelRequest;
+import com.vmelik.client.model.request.*;
 import com.vmelik.client.model.response.HotelContactInfoResponse;
 import com.vmelik.client.model.response.HotelInfoResponse;
+import com.vmelik.client.model.response.HotelRoomInfoResponse;
 
 import java.util.UUID;
 
@@ -26,4 +24,12 @@ public interface HotelServiceClient {
     HotelContactInfoResponse updateContact(UUID contactId, UpdateHotelContactRequest updateHotelContactRequest);
 
     HotelContactInfoResponse deleteContact(UUID contactId);
+
+    HotelRoomInfoResponse addHotelRoom(AddHotelRoomRequest request);
+
+    HotelRoomInfoResponse findHotelRoom(UUID roomId);
+
+    HotelRoomInfoResponse updateHotelRoom(UUID roomId, UpdateHotelRoomRequest request);
+
+    HotelRoomInfoResponse deleteHotelRoom(UUID roomId);
 }
