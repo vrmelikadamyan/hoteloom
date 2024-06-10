@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface HotelRoomService {
 
-    HotelRoom addRoom(UUID hotelId, AddHotelRoomRequest hotelRoom);
+    HotelRoom addRoom(AddHotelRoomRequest hotelRoom);
 
     HotelRoom findRoom(UUID roomId);
 

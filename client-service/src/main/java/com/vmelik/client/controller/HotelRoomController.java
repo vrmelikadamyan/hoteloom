@@ -1,5 +1,6 @@
 package com.vmelik.client.controller;
 
+import com.vmelik.client.client.HotelServiceClient;
 import com.vmelik.client.model.request.AddHotelRoomRequest;
 import com.vmelik.client.model.request.UpdateHotelRoomRequest;
 import com.vmelik.client.model.response.HotelRoomInfoResponse;
@@ -10,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("client/hotels/{hotelId}/rooms")
+@RequestMapping("client/hotels/rooms")
 @RequiredArgsConstructor
 public class HotelRoomController {
+    private final HotelServiceClient hotelServiceClient;
 
     @PostMapping
     public HotelRoomInfoResponse addHotelRoom(
-            @PathVariable("hotelId") UUID hotelId,
             @RequestBody @Valid AddHotelRoomRequest request
     ) {
         return null;

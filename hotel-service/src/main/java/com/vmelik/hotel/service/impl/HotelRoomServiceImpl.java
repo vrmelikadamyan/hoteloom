@@ -25,8 +25,8 @@ public class HotelRoomServiceImpl implements HotelRoomService {
 
     @Override
     @Transactional
-    public HotelRoom addRoom(UUID hotelId, AddHotelRoomRequest hotelRoom) {
-        Hotel hotel = hotelService.findHotel(hotelId);
+    public HotelRoom addRoom(AddHotelRoomRequest hotelRoom) {
+        Hotel hotel = hotelService.findHotel(hotelRoom.getHotelId());
         HotelRoomType roomType = hotelRoomTypeService.findHotelRoomType(hotelRoom.getRoomTypeId());
 
         HotelRoom newRoom = new HotelRoom();
