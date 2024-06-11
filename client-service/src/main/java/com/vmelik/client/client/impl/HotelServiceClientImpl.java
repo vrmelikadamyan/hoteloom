@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class HotelServiceRestClient implements HotelServiceClient {
+public class HotelServiceClientImpl implements HotelServiceClient {
     private final RestClient hotelServiceRestClient;
 
     @Override
