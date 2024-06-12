@@ -1,10 +1,17 @@
 server:
   port: 8082
 
-services:
-  hotel-service:
-    url: http://localhost:8081/api/hotels
-
 springdoc:
   api-docs:
     path: /api-docs
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8088/realms/hoteloom-app
+
+services:
+  hotel-service:
+    url: http://localhost:8081/api/hotels

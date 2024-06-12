@@ -6,8 +6,11 @@ import com.vmelik.hotel.model.request.UpdateHotelRoomRequest;
 import com.vmelik.hotel.model.response.HotelRoomInfoResponse;
 import com.vmelik.hotel.model.response.HotelRoomTypeResponse;
 import com.vmelik.hotel.service.HotelRoomService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -19,6 +22,8 @@ public class HotelRoomController {
     private final HotelRoomService hotelRoomService;
 
     @PostMapping
+    @PreAuthorize("hasRole('admin')")
+    @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelRoomInfoResponse addHotelRoom(
             @RequestBody @Valid AddHotelRoomRequest request
     ) {
@@ -39,6 +44,8 @@ public class HotelRoomController {
     }
 
     @GetMapping("/{roomId}")
+    @PreAuthorize("hasRole('user')")
+    @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelRoomInfoResponse findHotelRoom(@PathVariable("roomId") UUID roomId) {
         HotelRoom hotelRoom = hotelRoomService.findRoom(roomId);
 
@@ -57,6 +64,8 @@ public class HotelRoomController {
     }
 
     @PutMapping("/{roomId}")
+    @PreAuthorize("hasRole('admin')")
+    @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelRoomInfoResponse updateHotelRoom(
             @PathVariable("roomId") UUID roomId,
             @RequestBody @Valid UpdateHotelRoomRequest request
@@ -78,6 +87,8 @@ public class HotelRoomController {
     }
 
     @DeleteMapping("/{roomId}")
+    @PreAuthorize("hasRole('admin')")
+    @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelRoomInfoResponse deleteHotelRoom(@PathVariable("roomId") UUID roomId) {
         HotelRoom hotelRoom = hotelRoomService.deleteRoom(roomId);
 
