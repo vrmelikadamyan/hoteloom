@@ -54,10 +54,10 @@ class HotelControllerTest {
 
         when(hotelService.addHotel(request)).thenReturn(createdHotel);
         mockMvc.perform(
-                MockMvcRequestBuilders
-                        .post("/api/hotels")
-                        .content(toJsonString(request))
-                        .contentType(MediaType.APPLICATION_JSON))
+                        MockMvcRequestBuilders
+                                .post("/api/hotels")
+                                .content(toJsonString(request))
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().json(toJsonString(createdHotel)));

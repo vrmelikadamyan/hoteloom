@@ -30,7 +30,9 @@ services:
     image: keycloak/keycloak:25.0.0
     command:
       - start-dev
+      - --import-realm
     environment:
+      KEYCLOAK_IMPORT: /keycloak/realm.json
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       DB_VENDOR: POSTGRES
@@ -44,6 +46,8 @@ services:
       - "9001:9000"
     depends_on:
       - postgres-keycloak
+    volumes:
+      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json
 
 volumes:
   hoteloom-db-data:

@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -19,6 +20,7 @@ public class HotelContactController {
     private final HotelServiceClient hotelServiceClient;
 
     @PostMapping
+    @PreAuthorize("hasRole('admin')")
     @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelContactInfoResponse addContact(
             @RequestBody @Valid AddHotelContactRequest addHotelContactRequest
@@ -27,6 +29,7 @@ public class HotelContactController {
     }
 
     @GetMapping("/{contactId}")
+    @PreAuthorize("hasRole('user')")
     @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelContactInfoResponse findContact(
             @PathVariable("contactId") UUID contactId
@@ -35,6 +38,7 @@ public class HotelContactController {
     }
 
     @PutMapping("/{contactId}")
+    @PreAuthorize("hasRole('admin')")
     @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelContactInfoResponse updateContact(
             @PathVariable("contactId") UUID contactId,
@@ -44,6 +48,7 @@ public class HotelContactController {
     }
 
     @DeleteMapping("/{contactId}")
+    @PreAuthorize("hasRole('admin')")
     @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelContactInfoResponse deleteContact(
             @PathVariable("contactId") UUID contactId
