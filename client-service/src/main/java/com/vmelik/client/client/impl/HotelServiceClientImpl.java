@@ -7,12 +7,11 @@ import com.vmelik.client.model.response.HotelInfoResponse;
 import com.vmelik.client.model.response.HotelRoomInfoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 import java.util.UUID;
 
-@Component
+//@Component - use FeignClient instead RestClient
 @RequiredArgsConstructor
 public class HotelServiceClientImpl implements HotelServiceClient {
     private final RestClient hotelServiceRestClient;

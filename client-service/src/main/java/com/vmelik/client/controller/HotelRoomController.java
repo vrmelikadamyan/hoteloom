@@ -25,14 +25,14 @@ public class HotelRoomController {
     public HotelRoomInfoResponse addHotelRoom(
             @RequestBody @Valid AddHotelRoomRequest request
     ) {
-        return null;
+        return hotelServiceClient.addHotelRoom(request);
     }
 
     @GetMapping("/{roomId}")
     @PreAuthorize("hasRole('user')")
     @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelRoomInfoResponse findHotelRoom(@PathVariable("roomId") UUID roomId) {
-        return null;
+        return hotelServiceClient.findHotelRoom(roomId);
     }
 
     @PutMapping("/{roomId}")
@@ -42,13 +42,13 @@ public class HotelRoomController {
             @PathVariable("roomId") UUID roomId,
             @RequestBody @Valid UpdateHotelRoomRequest request
     ) {
-        return null;
+        return hotelServiceClient.updateHotelRoom(roomId, request);
     }
 
     @DeleteMapping("/{roomId}")
     @PreAuthorize("hasRole('admin')")
     @Operation(security = {@SecurityRequirement(name = "authorization")})
     public HotelRoomInfoResponse deleteHotelRoom(@PathVariable("roomId") UUID roomId) {
-        return null;
+        return hotelServiceClient.deleteHotelRoom(roomId);
     }
 }
