@@ -1,6 +1,12 @@
 version: "3.9"
 name: local_environment
 
+x-common-variables: &common-variables
+  SPRING_PROFILES_ACTIVE: standalone
+  EUREKA_SERVER_URL: http://eureka-server:8761/eureka
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteloom
+  OAUTH2_ISSUER: http://keycloak:8088/realms/hoteloom-app
+
 services:
   postgres:
     container_name: postgres
@@ -48,6 +54,65 @@ services:
       - postgres-keycloak
     volumes:
       - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json
+
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: ../eureka-server
+      dockerfile: Dockerfile
+    environment:
+      <<: *common-variables
+      SERVER_PORT: 8761
+    ports:
+      - "8761:8761"
+
+  gateway-service:
+    container_name: gateway-service
+    build:
+      context: ../gateway-service
+      dockerfile: Dockerfile
+    environment:
+      <<: *common-variables
+      EUREKA_SERVER_URL: http://eureka-server:8761/eureka
+      SERVER_PORT: 8888
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka-server
+
+  admin-service:
+    container_name: admin-service
+    build:
+      context: ../admin-service
+      dockerfile: Dockerfile
+    environment:
+      <<: *common-variables
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteloom
+    depends_on:
+      - postgres
+
+  client-service:
+    container_name: client-service
+    build:
+      context: ../client-service
+      dockerfile: Dockerfile
+    environment:
+      <<: *common-variables
+      SERVER_PORT: 8081
+    ports:
+      - "8081:8081"
+
+  hotel-service:
+    container_name: hotel-service
+    build:
+      context: ../hotel-service
+      dockerfile: Dockerfile
+    environment:
+      <<: *common-variables
+      SERVER_PORT: 8082
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/hoteloom?currentSchema=hotel_service
+    ports:
+      - "8082:8082"
 
 volumes:
   hoteloom-db-data:
