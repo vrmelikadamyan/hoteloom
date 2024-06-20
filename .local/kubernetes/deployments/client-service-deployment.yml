@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-service
+  labels:
+    app: client-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-service
+  template:
+    metadata:
+      labels:
+        app: client-service
+    spec:
+      containers:
+        - name: client-service
+          image: client-service:latest
+          imagePullPolicy: Never # Never is for local minikube testing
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: SPRING_PROFILES_ACTIVE
+              value: standalone
+            - name: EUREKA_SERVER_URL
+              value: http://eureka-server:8080/eureka
+            - name: OAUTH2_ISSUER
+              value: http://keycloak:8080/realms/hoteloom-app

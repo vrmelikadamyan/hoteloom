@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-secret
+  labels:
+    app: postgres
+data: # TODO move to secrets
+  POSTGRES_DB: hoteloom
+  POSTGRES_USER: superadmin
+  POSTGRES_PASSWORD: superpassword
