@@ -12,14 +12,14 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class ClientConfig {
 
-    @Bean
-    public RestClient hotelServiceRestClient(@Value("${services.hotel-service.url}") String hotelServiceUrl) {
-        return RestClient
-                .builder()
-                .baseUrl(hotelServiceUrl)
-                .requestInterceptor(requestInterceptor())
-                .build();
-    }
+//    @Bean
+//    public RestClient hotelServiceRestClient(@Value("${services.hotel-service.url}") String hotelServiceUrl) {
+//        return RestClient
+//                .builder()
+//                .baseUrl(hotelServiceUrl)
+//                .requestInterceptor(requestInterceptor())
+//                .build();
+//    }
 
     private ClientHttpRequestInterceptor requestInterceptor() {
         return (request, body, execution) -> {
