@@ -20,12 +20,9 @@ spec:
           imagePullPolicy: Never # Never is for local minikube testing
           ports:
             - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: common-values
           env:
             - name: SERVER_PORT
               value: "8080"
-            - name: SPRING_PROFILES_ACTIVE
-              value: standalone
-            - name: EUREKA_SERVER_URL
-              value: http://eureka-server:8080/eureka
-            - name: OAUTH2_ISSUER
-              value: http://keycloak:8080/realms/hoteloom-app

@@ -20,8 +20,9 @@ spec:
           imagePullPolicy: Never # Never is for local minikube testing
           ports:
             - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: common-values
           env:
             - name: SERVER_PORT
               value: "8080"
-            - name: SPRING_PROFILES_ACTIVE
-              value: standalone

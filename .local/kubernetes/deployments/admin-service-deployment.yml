@@ -18,8 +18,9 @@ spec:
         - name: admin-service
           image: admin-service:latest
           imagePullPolicy: Never # Never is for local minikube testing
+          envFrom:
+            - configMapRef:
+                name: common-values
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://postgres:5432/hoteloom
-            - name: SPRING_PROFILES_ACTIVE
-              value: standalone
